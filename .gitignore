@@ -4,9 +4,6 @@
 *.class
 *.dll
 *.exe
-*.o
-*.so
-*.pyc
 
 # Logs and databases #
 ######################
