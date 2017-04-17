@@ -19,11 +19,17 @@ var Greeter = React.createClass({
     onButtonClick: function (e) {
         e.preventDefault();
 
-        var name = this.refs.name.value;
+        var nameRef = this.refs.name;
+        var name = nameRef.value;
 
-        this.setState({
-            name: name
-        });
+        // remove entered text in field
+        nameRef.value = '';
+
+        if ( typeof name === 'string' && name.length > 0 ) {
+            this.setState({
+                name: name
+            });
+        }
     },
     // the render method is the only method required for a component
     render: function() {
