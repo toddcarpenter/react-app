@@ -1,5 +1,42 @@
 // to see JSX's output see http://babeljs.io/repl/
 
+// this is a child component. It is presentational
+var GreeterMessage = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <h1>h1 tag</h1>
+                <p>p tag</p>
+            </div>
+        );
+    }
+});
+
+// this is a child component. It is presentational
+var GreeterForm = React.createClass({
+    onFormSubmit: function (e) {
+        e.preventDefault();
+
+        var name = this.refs.name.value;
+
+        if (name.length > 0) {
+            this.refs.name.value = '';
+            this.props.onNewName(name);
+        }
+    },
+    render: function () {
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit}>
+                    <input type="text" ref="name"/>
+                    <input type="submit"/>
+                </form>
+            </div>
+        );
+    }
+});
+
+// this is the container componnet. It maintains State
 var Greeter = React.createClass({
 
     // sets defaults for properties if noone are set on the Component
@@ -7,7 +44,7 @@ var Greeter = React.createClass({
         return {
             name: 'React',
             message: 'This is from a component!'
-        }
+        };
     },
     // returns an object with inital state from property provided
     // then you retrieve it with this.state.name below
@@ -16,20 +53,11 @@ var Greeter = React.createClass({
             name: this.props.name
         };
     },
-    onButtonClick: function (e) {
-        e.preventDefault();
-
-        var nameRef = this.refs.name;
-        var name = nameRef.value;
-
-        // remove entered text in field
-        nameRef.value = '';
-
-        if ( typeof name === 'string' && name.length > 0 ) {
-            this.setState({
-                name: name
-            });
-        }
+    // when setting up a parent to handle the property/state, you start it with "handle"
+    handleNewName: function (name) {
+        this.setState({
+            name: name
+        });
     },
     // the render method is the only method required for a component
     render: function() {
@@ -40,15 +68,16 @@ var Greeter = React.createClass({
             // you can only render one root element
             // multiple root elems will throw an error
             <div>
-                <h1>Hello {name}!</h1>
-
                 {/*this is a JS expression. you can add any JS you like in here*/}
-                <p>{message}</p>
 
-                <form onSubmit={this.onButtonClick}>
-                    <input type="text" ref="name"/>
-                    <input type="submit"/>
-                </form>
+                <h1>hello {name}</h1>
+                <p>p tag</p>
+
+                {/* a nested componnents */}
+                <GreeterMessage/>
+
+                {/* when setting up a child to pass the property/state, you start it with "on" */}
+                <GreeterForm onNewName={this.handleNewName}/>
             </div>
         );
     }
