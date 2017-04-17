@@ -1,6 +1,6 @@
 var express = require('express');
 
-// Create app
+// create app
 var app = express();
 
 // tell the server what directory to use
