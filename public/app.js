@@ -1,5 +1,3 @@
-function greeter () {
-    document.write('From greeter function');
-}
+var greeter = require('./components/Greeter');
 
 greeter();

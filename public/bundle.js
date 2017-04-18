@@ -42,13 +42,22 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	function greeter () {
-	    document.write('From greeter function');
-	}
+	var greeter = __webpack_require__(1);
 
 	greeter();
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	function greeter() {
+	    document.write('From greeter 555');
+	}
+
+	// anyone who "requires"" this file will now get access to this function
+	module.exports = greeter;
 
 /***/ }
 /******/ ]);
