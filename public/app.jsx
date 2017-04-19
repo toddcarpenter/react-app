@@ -1,5 +1,9 @@
 // to see JSX's output see http://babeljs.io/repl/
 
+// these were installed with npm & need ot be explicitly required since we can't assume react is global
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 // this is a child component. It is presentational
 var GreeterMessage = React.createClass({
     render: function () {
